@@ -1,0 +1,11 @@
+{
+  "//": "Firebase Realtime Database rules. Paste these in Firebase console > Realtime Database > Rules. Requires anonymous auth (Authentication > Sign-in method > Anonymous > Enable). This locks read/write to your app only. It is 'family-grade' security, not bank-grade — anyone with your Firebase config AND the app could still read/write. Keep control.html's password private.",
+  "rules": {
+    "families": {
+      "$family": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    }
+  }
+}

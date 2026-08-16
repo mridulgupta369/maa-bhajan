@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Simple diya flame in gold, centred in the safe zone. -->
+    <path
+        android:fillColor="#ffd479"
+        android:pathData="M54,30 C61,42 66,49 66,58 A12,12 0 0 1 42,58 C42,49 47,42 54,30 Z" />
+    <path
+        android:fillColor="#ffedc2"
+        android:pathData="M54,44 C58,50 60,54 60,58 A6,6 0 0 1 48,58 C48,54 50,50 54,44 Z" />
+    <!-- diya base -->
+    <path
+        android:fillColor="#ffd479"
+        android:pathData="M38,72 L70,72 C68,80 61,84 54,84 C47,84 40,80 38,72 Z" />
+</vector>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Maa ke Bhajan</string>
+    <!-- The web app it loads. Change this if your GitHub Pages URL differs. -->
+    <string name="app_url">https://mridulgupta369.github.io/maa-bhajan/index.html?native=1</string>
+</resources>

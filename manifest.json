@@ -1,0 +1,14 @@
+{
+  "name": "Maa ke Bhajan",
+  "short_name": "Bhajan",
+  "description": "Bhajans, aarti and devotional radio for Maa.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#140a24",
+  "theme_color": "#6d28d9",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

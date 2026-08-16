@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <title>Maa ke Bhajan</title>
+  <meta name="theme-color" content="#6d28d9" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+  <!-- First-tap overlay: browsers require ONE tap before audio can start. -->
+  <div id="overlay" class="overlay">
+    <h2>🙏 राम राम 🙏</h2>
+    <button id="bigPlay" class="big-play">
+      <span class="tri">▶</span>
+      <span>सुनना शुरू करें<br><small style="font-weight:500;opacity:.85">Tap to start</small></span>
+    </button>
+    <p id="overlayMsg">बटन दबाएँ · Press the button</p>
+  </div>
+
+  <h1 class="app-title" id="title">🙏 Maa ke Bhajan 🙏</h1>
+  <div class="status-strip" id="statusStrip"></div>
+
+  <div id="yt-host"><div id="yt-player"></div></div>
+
+  <main class="grid" id="grid"><!-- tiles injected here --></main>
+
+  <div class="transport">
+    <button class="btn-quiet" id="btnPause">⏸️ रोकें</button>
+    <button class="btn-stop"  id="btnStop">⏹️ बंद</button>
+  </div>
+
+  <audio id="radio" preload="none"></audio>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script type="module" src="./app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    }
+  </script>
+</body>
+</html>

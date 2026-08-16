@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Shared styles — big, warm, high-contrast, elderly-friendly.
+   ========================================================================== */
+:root {
+  --bg1: #2a1746;
+  --bg2: #140a24;
+  --gold: #ffd479;
+  --text: #fdf6ee;
+  --muted: #cbb8e6;
+  --tile-radius: 22px;
+  --ok: #34d399;
+  --bad: #f87171;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0; padding: 0; min-height: 100%;
+  font-family: "Segoe UI", system-ui, -apple-system, "Noto Sans Devanagari", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at 50% 0%, var(--bg1), var(--bg2) 70%);
+  -webkit-user-select: none; user-select: none;
+}
+
+body { min-height: 100dvh; display: flex; flex-direction: column; }
+
+/* ---------- Player (Grandma) ---------- */
+.app-title {
+  text-align: center;
+  font-size: clamp(26px, 7vw, 40px);
+  font-weight: 800;
+  padding: 18px 12px 6px;
+  color: var(--gold);
+  text-shadow: 0 2px 12px rgba(0,0,0,.4);
+  letter-spacing: .5px;
+}
+
+.status-strip {
+  text-align: center; font-size: 14px; color: var(--muted);
+  padding: 0 12px 10px; min-height: 18px;
+}
+
+.grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 12px 16px 24px;
+  align-content: start;
+}
+@media (max-width: 380px) { .grid { grid-template-columns: 1fr; } }
+
+.tile {
+  border: none;
+  border-radius: var(--tile-radius);
+  padding: 22px 14px;
+  min-height: 132px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.15);
+  transition: transform .08s ease, filter .15s ease;
+  text-align: center;
+}
+.tile:active { transform: scale(.96); filter: brightness(1.1); }
+.tile .emoji { font-size: 46px; line-height: 1; }
+.tile .label { font-size: clamp(19px, 5.2vw, 24px); }
+.tile .sub   { font-size: 13px; font-weight: 500; opacity: .85; }
+.tile.playing { outline: 4px solid var(--gold); animation: pulse 1.6s infinite; }
+
+@keyframes pulse { 0%,100%{ box-shadow:0 8px 22px rgba(0,0,0,.35);} 50%{ box-shadow:0 0 34px var(--gold);} }
+
+/* transport bar */
+.transport {
+  display: flex; gap: 12px; padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
+  background: rgba(0,0,0,.25); backdrop-filter: blur(6px);
+}
+.transport button {
+  flex: 1; border: none; border-radius: 16px; padding: 18px;
+  font-size: 20px; font-weight: 800; color: #fff; cursor: pointer;
+}
+.btn-stop  { background: #b91c1c; }
+.btn-quiet { background: #4b5563; }
+.transport button:active { filter: brightness(1.15); }
+
+/* first-tap overlay */
+.overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(10,4,24,.94);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 20px; padding: 24px; text-align: center;
+}
+.overlay.hidden { display: none; }
+.overlay h2 { font-size: 26px; margin: 0; color: var(--gold); }
+.overlay p  { font-size: 18px; color: var(--muted); margin: 0; }
+.big-play {
+  width: min(72vw, 260px); height: min(72vw, 260px);
+  border-radius: 50%; border: none;
+  background: radial-gradient(circle at 40% 35%, #a855f7, #6d28d9);
+  color: #fff; font-size: 30px; font-weight: 800; cursor: pointer;
+  box-shadow: 0 0 44px rgba(168,85,247,.6);
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;
+  animation: pulse 1.8s infinite;
+}
+.big-play .tri { font-size: 74px; }
+
+/* hidden youtube host */
+#yt-host { position: fixed; left: -9999px; top: -9999px; width: 1px; height: 1px; }
+#yt-host.visible {
+  position: static; left: auto; top: auto;
+  width: 100%; max-width: 640px; margin: 0 auto 8px;
+  aspect-ratio: 16/9; height: auto;
+}
+
+/* ---------- Control panel (You) ---------- */
+.wrap { max-width: 720px; margin: 0 auto; padding: 20px 16px 60px; width: 100%; }
+.card {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px; padding: 16px; margin-bottom: 18px;
+}
+.card h3 { margin: 0 0 12px; color: var(--gold); font-size: 18px; }
+label.field { display: block; margin: 10px 0 4px; font-size: 13px; color: var(--muted); }
+input, select, textarea {
+  width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.3); color: var(--text); font-size: 16px;
+}
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.row > * { flex: 1; min-width: 120px; }
+button.primary {
+  background: linear-gradient(120deg,#7c3aed,#a855f7); color:#fff; border:none;
+  padding: 14px 18px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer;
+  width: 100%; margin-top: 12px;
+}
+button.ghost {
+  background: rgba(255,255,255,.08); color: var(--text); border: 1px solid rgba(255,255,255,.2);
+  padding: 10px 12px; border-radius: 10px; cursor: pointer; font-size: 14px;
+}
+button.danger { background:#b91c1c; color:#fff; border:none; padding:10px 12px; border-radius:10px; cursor:pointer; }
+.pill { display:inline-block; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+.pill.on  { background: rgba(52,211,153,.18); color: var(--ok); }
+.pill.off { background: rgba(248,113,113,.18); color: var(--bad); }
+
+.list-item {
+  display:flex; align-items:center; gap:10px; padding:10px; border-radius:12px;
+  background: rgba(0,0,0,.25); margin-bottom:8px;
+}
+.list-item .grab { cursor: grab; font-size: 18px; opacity:.6; }
+.list-item .meta { flex:1; min-width:0; }
+.list-item .meta b { display:block; }
+.list-item .meta small { color: var(--muted); word-break: break-all; }
+.swatch { width: 22px; height: 22px; border-radius: 6px; flex: none; }
+
+.gate { max-width: 380px; margin: 15vh auto; text-align: center; }
+.hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.playnow-buttons { display:grid; grid-template-columns: repeat(auto-fill,minmax(120px,1fr)); gap:8px; }
+.playnow-buttons button { padding:12px; }

@@ -1,0 +1,68 @@
+{
+  "_comment": "FALLBACK content, used only in LOCAL MODE (before Firebase is set up). Once Firebase is on, the buttons come live from your control panel instead. You can still edit this file as the default 'seed' screen. Replace the example URLs with your own — the control panel makes this easy.",
+
+  "title": "🙏 Maa ke Bhajan 🙏",
+  "autoplayHint": true,
+
+  "buttons": [
+    {
+      "id": "b1",
+      "label": "हनुमान चालीसा",
+      "subtitle": "Hanuman Chalisa",
+      "icon": "🕉️",
+      "color": "#c2410c",
+      "type": "youtube",
+      "value": "PASTE_A_YOUTUBE_LINK_HERE"
+    },
+    {
+      "id": "b2",
+      "label": "भजन प्लेलिस्ट",
+      "subtitle": "Bhajans (non-stop)",
+      "icon": "🎵",
+      "color": "#7c3aed",
+      "type": "playlist",
+      "value": "PASTE_A_YOUTUBE_PLAYLIST_LINK_HERE"
+    },
+    {
+      "id": "b3",
+      "label": "आरती",
+      "subtitle": "Aarti",
+      "icon": "🪔",
+      "color": "#b45309",
+      "type": "youtube",
+      "value": "PASTE_A_YOUTUBE_LINK_HERE"
+    },
+    {
+      "id": "b4",
+      "label": "भक्ति रेडियो",
+      "subtitle": "Devotional Radio",
+      "icon": "📻",
+      "color": "#0f766e",
+      "type": "radio",
+      "value": "PASTE_A_RADIO_STREAM_URL_HERE"
+    }
+  ],
+
+  "schedules": [
+    {
+      "id": "s_morning",
+      "label": "प्रातः आरती (Morning Aarti)",
+      "time": "07:00",
+      "days": [],
+      "enabled": false,
+      "type": "youtube",
+      "value": "PASTE_A_YOUTUBE_LINK_HERE",
+      "icon": "🪔"
+    },
+    {
+      "id": "s_evening",
+      "label": "संध्या आरती (Evening Aarti)",
+      "time": "19:00",
+      "days": [],
+      "enabled": false,
+      "type": "youtube",
+      "value": "PASTE_A_YOUTUBE_LINK_HERE",
+      "icon": "🪔"
+    }
+  ]
+}

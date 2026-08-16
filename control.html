@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Control Panel · Maa Bhajan</title>
+  <meta name="theme-color" content="#6d28d9" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+  <!-- password gate -->
+  <div id="gate" class="gate">
+    <h1 class="app-title">🔒 Control Panel</h1>
+    <div class="card">
+      <label class="field">Password</label>
+      <input id="pw" type="password" placeholder="Enter control password" />
+      <button class="primary" id="pwBtn">Unlock</button>
+      <p class="hint" id="pwHint"></p>
+    </div>
+  </div>
+
+  <!-- panel -->
+  <div id="panel" class="wrap" style="display:none">
+    <h1 class="app-title" style="font-size:26px">🎛️ Maa's Phone — Control</h1>
+
+    <div class="card">
+      <h3>📶 Her phone</h3>
+      <div id="presence">Checking…</div>
+    </div>
+
+    <div class="card">
+      <h3>▶ Play now on her phone</h3>
+      <p class="hint">Instant. She must have tapped "start" once after opening the app.</p>
+      <div class="playnow-buttons" id="playNowButtons"></div>
+      <label class="field">…or play a one-off link right now</label>
+      <div class="row">
+        <select id="pnType">
+          <option value="youtube">YouTube video</option>
+          <option value="playlist">YouTube playlist</option>
+          <option value="radio">Radio / audio stream</option>
+        </select>
+        <input id="pnValue" placeholder="Paste link/URL" />
+      </div>
+      <button class="primary" id="pnPlay">▶ Play this now</button>
+      <div class="row" style="margin-top:10px">
+        <button class="ghost" id="pnPause">⏸️ Pause her phone</button>
+        <button class="danger" id="pnStop">⏹️ Stop her phone</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔲 Buttons on her screen</h3>
+      <p class="hint">These are the big tiles she taps. Drag ☰ to reorder. Saved live.</p>
+      <div id="buttonList"></div>
+    </div>
+
+    <div class="card">
+      <h3>➕ Add / edit a button</h3>
+      <label class="field">Label (big text, e.g. हनुमान चालीसा)</label>
+      <input id="fLabel" placeholder="हनुमान चालीसा" />
+      <div class="row">
+        <div>
+          <label class="field">Subtitle (small)</label>
+          <input id="fSub" placeholder="Hanuman Chalisa" />
+        </div>
+        <div>
+          <label class="field">Emoji</label>
+          <input id="fIcon" placeholder="🕉️" maxlength="4" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label class="field">Type</label>
+          <select id="fType">
+            <option value="youtube">YouTube video</option>
+            <option value="playlist">YouTube playlist</option>
+            <option value="radio">Radio / audio stream</option>
+            <option value="link">Other link (opens new tab)</option>
+          </select>
+        </div>
+        <div>
+          <label class="field">Colour</label>
+          <input id="fColor" type="color" value="#7c3aed" style="height:46px;padding:4px" />
+        </div>
+      </div>
+      <label class="field">Link / URL</label>
+      <input id="fValue" placeholder="https://youtu.be/…  or  https://…stream.mp3" />
+      <input type="hidden" id="fEditId" />
+      <button class="primary" id="fSave">💾 Save button</button>
+      <button class="ghost" id="fClear" style="width:100%;margin-top:8px">Clear form</button>
+    </div>
+
+    <div class="card">
+      <h3>⏰ Scheduled aarti / bhajans</h3>
+      <p class="hint">Plays automatically at the set time (app must be open on her phone — the native app keeps it open). Leave days empty = every day.</p>
+      <div id="scheduleList"></div>
+      <label class="field">Time</label>
+      <input id="sTime" type="time" value="07:00" />
+      <label class="field">Days (none checked = daily)</label>
+      <div class="row" id="sDays" style="gap:6px">
+        <label class="ghost" style="flex:0 0 auto"><input type="checkbox" value="0"> Sun</label>
+        <label class="ghost" style="flex:0 0 auto"><input type="checkbox" value="1"> Mon</label>
+        <label class="ghost" style="flex:0 0 auto"><input type="checkbox" value="2"> Tue</label>
+        <label class="ghost" style="flex:0 0 auto"><input type="checkbox" value="3"> Wed</label>
+        <label class="ghost" style="flex:0 0 auto"><input type="checkbox" value="4"> Thu</label>
+        <label class="ghost" style="flex:0 0 auto"><input type="checkbox" value="5"> Fri</label>
+        <label class="ghost" style="flex:0 0 auto"><input type="checkbox" value="6"> Sat</label>
+      </div>
+      <label class="field">What to play</label>
+      <select id="sPick"></select>
+      <div id="sCustom" style="display:none">
+        <div class="row">
+          <select id="sType">
+            <option value="youtube">YouTube video</option>
+            <option value="playlist">YouTube playlist</option>
+            <option value="radio">Radio / audio stream</option>
+          </select>
+          <input id="sValue" placeholder="Paste link/URL" />
+        </div>
+        <input id="sLabel" placeholder="Label (e.g. प्रातः आरती)" style="margin-top:8px" />
+      </div>
+      <input type="hidden" id="sEditId" />
+      <button class="primary" id="sSave">💾 Save schedule</button>
+      <button class="ghost" id="sClear" style="width:100%;margin-top:8px">Clear</button>
+    </div>
+
+    <div class="card">
+      <h3>📝 Screen title</h3>
+      <div class="row">
+        <input id="fTitle" placeholder="🙏 Maa ke Bhajan 🙏" />
+        <button class="ghost" id="fTitleSave">Save title</button>
+      </div>
+    </div>
+
+    <p class="hint" id="saveState" style="text-align:center"></p>
+  </div>
+
+  <script type="module" src="./control.js"></script>
+</body>
+</html>
