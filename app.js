@@ -177,8 +177,26 @@ function shade(hex, pct){
 }
 
 // ============================================================================
+//  NATIVE BRIDGE — the Android app calls this to play a scheduled aarti it woke
+//  up for, and we push schedule changes to it so it can set OS-level alarms.
+// ============================================================================
+window.__nativePlay = function (type, value, label) {
+  audioUnlocked = true;
+  hideOverlay();
+  play({ id: 'native', type, value, label, icon: '🪔' });
+};
+function syncSchedulesToNative() {
+  try {
+    if (window.AndroidBridge && typeof AndroidBridge.setSchedules === 'function') {
+      AndroidBridge.setSchedules(JSON.stringify(schedules || []));
+    }
+  } catch (e) {}
+}
+
+// ============================================================================
 //  SCHEDULER — plays aarti/bhajans automatically at set times.
-//  Runs while the app is open (keep the app open + screen awake; see README).
+//  In the browser this JS timer does the work (app must stay open). In the
+//  native app, OS alarms handle it instead (fire even with the screen off).
 // ============================================================================
 function startScheduler() {
   runScheduleTick();
@@ -216,11 +234,13 @@ async function boot() {
     setStatus('LOCAL MODE — Firebase अभी set नहीं है (README देखें)');
     await loadLocalConfig();
   }
-  startScheduler();
+  // In native mode, OS alarms own scheduling; the JS timer is a browser-only fallback.
+  if (!NATIVE) startScheduler();
   if (NATIVE) {                         // native WebView: no tap needed
     audioUnlocked = true;
     hideOverlay();
     setStatus('तैयार · Ready');
+    syncSchedulesToNative();            // push current schedules to OS alarms
   }
 }
 
@@ -230,7 +250,7 @@ async function loadLocalConfig() {
     const cfg = await res.json();
     if (cfg.title) $('title').textContent = cfg.title;
     renderButtons(cfg.buttons || []);
-    if (Array.isArray(cfg.schedules)) schedules = cfg.schedules;
+    if (Array.isArray(cfg.schedules)) { schedules = cfg.schedules; syncSchedulesToNative(); }
   } catch (e) {
     setStatus('config.json लोड नहीं हुआ');
   }
@@ -278,6 +298,7 @@ async function startFirebase() {
   onValue(ref(db, `${base}/schedules`), (snap) => {
     const v = snap.val();
     schedules = !v ? [] : (Array.isArray(v) ? v.filter(Boolean) : Object.values(v));
+    syncSchedulesToNative();
   });
 
   // 3) report presence + what's playing

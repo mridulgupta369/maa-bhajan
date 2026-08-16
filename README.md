@@ -163,8 +163,18 @@ changes to the native shell itself need a fresh APK (one tap, from the same link
 
 In the control panel, the **"Scheduled aarti / bhajans"** card lets you set times
 (e.g. 07:00 and 19:00), pick days (empty = daily), and choose what plays. It fires
-automatically on her phone. With the **native app** it plays with zero taps; with the
-web version she needs to have tapped ▶ once and kept the app open.
+automatically on her phone.
+
+- **Native app:** the schedule is handed to Android's **alarm system**, which wakes
+  the phone and plays the aarti **even if the screen has been off for hours or the
+  app was closed** — then shows a full-screen "🪔 Aarti" and starts playing, zero taps.
+  Alarms re-arm themselves after each fire and after a reboot.
+- **Web version:** the app must be open and she must have tapped ▶ once; the in-page
+  timer then triggers it.
+
+> For the native alarms to survive MIUI, keep **Autostart ON** and **battery = No
+> restrictions** (same steps as the install checklist). On Android 12+ phones you'd
+> also allow "Alarms & reminders" — but her Poco F1 (Android ≤11) needs nothing extra.
 
 ## Full phone control 🖥️
 
@@ -173,7 +183,6 @@ For anything beyond media (settings, WhatsApp, fixing Wi-Fi…), see
 entire screen remotely.
 
 ## Want more later? (easy add-ons)
-- **Native background alarms** so aarti fires even with the screen off / app closed.
 - **Bigger "SOS / Call me" button** on her screen.
 - **Volume control** from your panel.
 
